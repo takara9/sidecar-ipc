@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: www
+spec:
+  containers:
+  - name: writer
+    image: maho/sidecar_ipc:wr
+    volumeMounts:
+    - mountPath: /mnt
+      name: shared-vol
+  - name: reader
+    image: maho/sidecar_ipc:rd
+    volumeMounts:
+    - mountPath: /mnt
+      name: shared-vol
+  volumes:
+  - name: shared-vol
+    emptyDir: {}
